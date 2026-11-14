@@ -223,7 +223,7 @@ function radar(){
  $('radarRoot').innerHTML=filtered.length?`<div class="contest-grid">${filtered.map(contestCard).join('')}</div>`:'<div class="radar-empty">Nenhum concurso encontrado no radar.</div>';
 }
 function ranking(){
- const open=rows.filter(openRegistrations);const scored=[],pending=[];
+ const open=rows.filter(c=>c.stage!=='Radar'&&openRegistrations(c));const scored=[],pending=[];
  for(const c of open){const info=rankInfo(c);(info.complete?scored:pending).push({c,info});}
  scored.sort((a,b)=>b.info.score-a.info.score||a.c.name.localeCompare(b.c.name,'pt-BR'));
  const highlight=scored.length?`<span>Maior nota</span><strong>${scored[0].info.score.toLocaleString('pt-BR',{maximumFractionDigits:1})}/100</strong>`:`<span>Pontuações completas</span><strong>0</strong>`;
